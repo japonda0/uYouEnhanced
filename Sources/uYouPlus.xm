@@ -401,10 +401,10 @@ YTMainAppControlsOverlayView *controlsOverlayView;
 + (id)spamSignalsDictionaryWithoutIDFA { return @{}; }
 %end
 %hook YTAdsInnerTubeContextDecorator
-- (void)decorateContext:(id)context { %orig(nil); }
+- (void)decorateContext:(id)context {}
 %end
 %hook YTAccountScopedAdsInnerTubeContextDecorator
-- (void)decorateContext:(id)context { %orig(nil); }
+- (void)decorateContext:(id)context {}
 %end
 %hook YTLocalPlaybackController
 - (id)createAdsPlaybackCoordinator { return nil; }
@@ -1168,7 +1168,11 @@ static int contrastMode() {
 // Disable double tap to seek
 %hook YTDoubleTapToSeekController
 - (void)enableDoubleTapToSeek:(BOOL)arg1 {
-    return IS_ENABLED(kDoubleTapToSeek) ? %orig(NO) : %orig;
+    if (IS_ENABLED(kDoubleTapToSeek)) {
+        %orig(NO);
+        return;
+    }
+    %orig;
 }
 %end
 
@@ -1252,7 +1256,11 @@ static int contrastMode() {
 // Hide CC / Hide Autoplay switch / Hide YTMusic Button / Enable Share Button / Enable Save to Playlist Button
 %hook YTMainAppControlsOverlayView
 - (void)setClosedCaptionsOrSubtitlesButtonAvailable:(BOOL)arg1 { // hide CC button
-    return IS_ENABLED(kHideCC) ? %orig(NO) : %orig;
+    if (IS_ENABLED(kHideCC)) {
+        %orig(NO);
+        return;
+    }
+    %orig;
 }
 - (void)setAutoplaySwitchButtonRenderer:(id)arg1 { // hide Autoplay
     if (IS_ENABLED(kHideAutoplaySwitch)) {}
