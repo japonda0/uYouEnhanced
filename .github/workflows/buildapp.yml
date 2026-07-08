@@ -147,6 +147,7 @@ jobs:
           mkdir -p "$THEOS/include"
           git clone --quiet --depth=1 https://github.com/PoomSmart/PSHeader.git "$THEOS/include/PSHeader"
           perl -0pi -e 's/NSMutableArray \*mutableCategories = %orig\.mutableCopy;/NSArray *orderedCategories = %orig;\n    NSMutableArray *mutableCategories = orderedCategories.mutableCopy;/' Tweaks/Return-YouTube-Dislikes/Settings.x
+          perl -0pi -e 's/NSMutableArray \*mutableCategories = %orig\.mutableCopy;/NSArray *orderedCategories = %orig;\n    NSMutableArray *mutableCategories = orderedCategories.mutableCopy;/' Tweaks/YTABConfig/Settings.x
           make package THEOS_PACKAGE_SCHEME=rootless IPA=Payload/YouTube.app FINALPACKAGE=1
           echo "package=$(ls -t packages | head -n1)" >>$GITHUB_OUTPUT
           echo -e "==> \033[1mSHASUM256: $(shasum -a 256 packages/*.ipa | cut -f1 -d' ')\033[0m"
