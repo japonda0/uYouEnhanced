@@ -146,6 +146,8 @@ jobs:
           sed -i '' "1s#.*#export TARGET = iphone:clang:${{ inputs.sdk_version }}:14.0#g" Makefile # Modify the SDK version
           mkdir -p "$THEOS/include"
           git clone --quiet --depth=1 https://github.com/PoomSmart/PSHeader.git "$THEOS/include/PSHeader"
+          git clone --quiet --depth=1 https://github.com/PoomSmart/YTIcons.git Tweaks/YTIcons
+          git clone --quiet --depth=1 https://github.com/PoomSmart/YouSpeed.git Tweaks/YouSpeed
           perl -0pi -e 's/NSMutableArray \*mutableCategories = %orig\.mutableCopy;/NSArray *orderedCategories = %orig;\n    NSMutableArray *mutableCategories = orderedCategories.mutableCopy;/' Tweaks/Return-YouTube-Dislikes/Settings.x
           perl -0pi -e 's/NSMutableArray \*mutableCategories = %orig\.mutableCopy;/NSArray *orderedCategories = %orig;\n    NSMutableArray *mutableCategories = orderedCategories.mutableCopy;/' Tweaks/YTABConfig/Settings.x
           make package THEOS_PACKAGE_SCHEME=rootless IPA=Payload/YouTube.app FINALPACKAGE=1
