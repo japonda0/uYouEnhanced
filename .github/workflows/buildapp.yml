@@ -153,6 +153,7 @@ jobs:
           perl -0pi -e 's/NSMutableArray \*mutableCategories = %orig\.mutableCopy;/NSArray *orderedCategories = %orig;\n    NSMutableArray *mutableCategories = orderedCategories.mutableCopy;/' Tweaks/YTIcons/Tweak.x
           perl -0pi -e 's# ?\$\(THEOS_OBJ_DIR\)/YouLoop\.dylib##; s# Tweaks/YouLoop##' Makefile
           perl -0pi -e 's# ?\$\(THEOS_OBJ_DIR\)/YouMute\.dylib##; s# Tweaks/YouMute##' Makefile
+          perl -0pi -e 'for my $name (qw(YouPiP YouQuality YouSpeed YouTimeStamp YTHoldForSpeed YoutubeSpeed YTUHD YTVideoOverlay)) { s# ?\$\(THEOS_OBJ_DIR\)/\Q$name\E\.dylib##g; } for my $dir (qw(YouPiP YouQuality YouSpeed YouTimeStamp YTHoldForSpeed YTSpeed YTUHD YTVideoOverlay)) { s# Tweaks/\Q$dir\E##g; }' Makefile
           make package THEOS_PACKAGE_SCHEME=rootless IPA=Payload/YouTube.app FINALPACKAGE=1
           echo "package=$(ls -t packages | head -n1)" >>$GITHUB_OUTPUT
           echo -e "==> \033[1mSHASUM256: $(shasum -a 256 packages/*.ipa | cut -f1 -d' ')\033[0m"
