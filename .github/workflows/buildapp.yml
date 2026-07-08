@@ -144,6 +144,8 @@ jobs:
           sed -i '' "27s#.*#BUNDLE_ID = ${{ env.BUNDLE_ID }}#g" Makefile                          # Modify the bundle ID
           sed -i '' "26s#.*#DISPLAY_NAME = ${{ env.APP_NAME }}#g" Makefile                        # Modify the app name
           sed -i '' "1s#.*#export TARGET = iphone:clang:${{ inputs.sdk_version }}:14.0#g" Makefile # Modify the SDK version
+          mkdir -p "$THEOS/include"
+          git clone --quiet --depth=1 https://github.com/PoomSmart/PSHeader.git "$THEOS/include/PSHeader"
           perl -0pi -e 's/NSMutableArray \*mutableCategories = %orig\.mutableCopy;/NSArray *orderedCategories = %orig;\n    NSMutableArray *mutableCategories = orderedCategories.mutableCopy;/' Tweaks/Return-YouTube-Dislikes/Settings.x
           make package THEOS_PACKAGE_SCHEME=rootless IPA=Payload/YouTube.app FINALPACKAGE=1
           echo "package=$(ls -t packages | head -n1)" >>$GITHUB_OUTPUT
