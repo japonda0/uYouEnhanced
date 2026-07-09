@@ -321,10 +321,6 @@ static NSString *const kGoogleSigninFix = @"googleSigninFix_enabled";
 
 // MLPlayerStickySettings Header has been moved to https://github.com/arichornloverALT/YouTubeHeader/blob/main/MLPlayerStickySettings.h
 
-@interface MLPlayerEventCenter : NSObject
-- (void)broadcastRateChange:(float)rate;
-@end
-
 @interface HAMPlayerInternal : NSObject
 - (void)setRate:(float)rate;
 @end
