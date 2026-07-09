@@ -554,8 +554,9 @@ static NSMutableArray <YTIItemSectionRenderer *> *filteredArray(NSArray <YTIItem
 // YTMiniPlayerEnabler: https://github.com/level3tjg/YTMiniplayerEnabler/
 %hook YTWatchMiniBarViewController
 - (void)updateMiniBarPlayerStateFromRenderer {
-    if (IS_ENABLED(kYTMiniPlayer)) {}
-    else { return %orig; }
+    if (!IS_ENABLED(kYTMiniPlayer)) {
+        %orig;
+    }
 }
 %end
 
@@ -815,8 +816,9 @@ static NSMutableArray <YTIItemSectionRenderer *> *filteredArray(NSArray <YTIItem
 // YTNoPaidPromo: https://github.com/PoomSmart/YTNoPaidPromo
 %hook YTMainAppVideoPlayerOverlayViewController
 - (void)setPaidContentWithPlayerData:(id)data {
-    if (IS_ENABLED(kHidePaidPromotionCard)) {}
-    else { return %orig; }
+    if (!IS_ENABLED(kHidePaidPromotionCard)) {
+        %orig;
+    }
 }
 - (void)playerOverlayProvider:(YTPlayerOverlayProvider *)provider didInsertPlayerOverlay:(YTPlayerOverlay *)overlay {
     if ([[overlay overlayIdentifier] isEqualToString:@"player_overlay_paid_content"] && IS_ENABLED(kHidePaidPromotionCard)) return;
@@ -826,8 +828,9 @@ static NSMutableArray <YTIItemSectionRenderer *> *filteredArray(NSArray <YTIItem
 
 %hook YTInlineMutedPlaybackPlayerOverlayViewController
 - (void)setPaidContentWithPlayerData:(id)data {
-    if (IS_ENABLED(kHidePaidPromotionCard)) {}
-    else { return %orig; }
+    if (!IS_ENABLED(kHidePaidPromotionCard)) {
+        %orig;
+    }
 }
 %end
 
@@ -1263,8 +1266,9 @@ static int contrastMode() {
     %orig;
 }
 - (void)setAutoplaySwitchButtonRenderer:(id)arg1 { // hide Autoplay
-    if (IS_ENABLED(kHideAutoplaySwitch)) {}
-    else { return %orig; }
+    if (!IS_ENABLED(kHideAutoplaySwitch)) {
+        %orig;
+    }
 }
 - (void)setYoutubeMusicButton:(id)arg1 {
     if (IS_ENABLED(kHideYTMusicButton)) {
@@ -1369,8 +1373,9 @@ static int contrastMode() {
 %end
 %hook YTAnnotationsViewController
 - (void)loadFeaturedChannelWatermark {
-    if (IS_ENABLED(kHideChannelWatermark)) {}
-    else { return %orig; }
+    if (!IS_ENABLED(kHideChannelWatermark)) {
+        %orig;
+    }
 }
 %end
 
@@ -1598,8 +1603,9 @@ static int contrastMode() {
 
 %hook YTReelWatchRootViewController
 - (void)setPausedStateCarouselView {
-    if (IS_ENABLED(kHideSubscriptions)) {}
-    else { return %orig; }
+    if (!IS_ENABLED(kHideSubscriptions)) {
+        %orig;
+    }
 }
 %end
 
