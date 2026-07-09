@@ -6,7 +6,8 @@
 %group gGoogleSignInPatch
 %hook NSBundle
 - (NSDictionary *)infoDictionary {
-    NSMutableDictionary *info = %orig.mutableCopy;
+    NSDictionary *originalInfo = %orig;
+    NSMutableDictionary *info = [originalInfo mutableCopy];
     if ([self isEqual:NSBundle.mainBundle])
         info[@"CFBundleIdentifier"] = @"com.google.ios.youtube";
     return info;
