@@ -1784,7 +1784,7 @@ static int contrastMode() {
 %end
 
 %hook YTHeaderContentComboView
-- (void)setFeedHeaderScrollMode:(int)arg1 { %orig(0); }
+- (void)setFeedHeaderScrollMode:(int)arg1 {}
 %end
 
 // Hide the chip bar under the video player?
